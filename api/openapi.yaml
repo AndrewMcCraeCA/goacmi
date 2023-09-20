@@ -1,0 +1,824 @@
+openapi: 3.0.1
+info:
+  contact:
+    name: ACMI - Your museum of screen culture
+    url: https://www.acmi.net.au
+  description: "A public API for ACMI's collection data including Films, TV Shows,\
+    \ Videogames and Art."
+  title: ACMI public API
+  version: "1.0"
+servers:
+- url: https://api.acmi.net.au/
+paths:
+  /:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/__get_200_response'
+          description: OK
+  /search/:
+    get:
+      operationId: search
+      parameters:
+      - description: Search query
+        in: query
+        name: query
+        schema:
+          type: string
+      - description: Limit search queries to a Work field. e.g. title
+        in: query
+        name: field
+        schema:
+          type: string
+      - description: Limit search result page size.
+        in: query
+        name: size
+        schema:
+          default: 20
+          maximum: 50
+          type: integer
+      - description: Retrieve a parcitular page of serach results.
+        in: query
+        name: page
+        schema:
+          type: integer
+      - description: Return the raw Elasticsearch results.
+        in: query
+        name: raw
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Works'
+          description: OK
+        "404":
+          content: {}
+          description: Not found
+      tags:
+      - search
+  /works/:
+    get:
+      operationId: getWorks
+      parameters:
+      - in: query
+        name: page
+        schema:
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Works'
+          description: OK
+        "404":
+          content: {}
+          description: Not found
+      tags:
+      - works
+  /works/{id}/:
+    get:
+      operationId: getWork
+      parameters:
+      - description: Work ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Work'
+          description: OK
+        "404":
+          content: {}
+          description: Not found
+      tags:
+      - work
+components:
+  schemas:
+    Work:
+      description: "A Work from the ACMI collection, such as a Film, TV show, Videogame\
+        \ or Artwork."
+      example:
+        last_on_display_date: last_on_display_date
+        creator_credit: creator_credit
+        videos:
+        - access_level: access_level
+          subtitles: subtitles
+          web_metadata: "{}"
+          resource: resource
+          web_resource: web_resource
+          animated_snapshot: animated_snapshot
+          id: 7
+          title: title
+          duration_secs: 9.301444
+          access_metadata: "{}"
+          master_metadata: "{}"
+          snapshot: snapshot
+        - access_level: access_level
+          subtitles: subtitles
+          web_metadata: "{}"
+          resource: resource
+          web_resource: web_resource
+          animated_snapshot: animated_snapshot
+          id: 7
+          title: title
+          duration_secs: 9.301444
+          access_metadata: "{}"
+          master_metadata: "{}"
+          snapshot: snapshot
+        source:
+          name: name
+          slug: slug
+        type: type
+        description_for_label: description_for_label
+        recommendations:
+        - quote: quote
+          avatar_image: avatar_image
+          display_name: display_name
+          job_title: job_title
+        - quote: quote
+          avatar_image: avatar_image
+          display_name: display_name
+          job_title: job_title
+        title_for_label: title_for_label
+        source_identifier: source_identifier
+        credit_line: credit_line
+        stats:
+          tap_count: 6
+        headline_credit: headline_credit
+        details:
+        - display_values:
+          - display_values
+          - display_values
+          label: label
+        - display_values:
+          - display_values
+          - display_values
+          label: label
+        links:
+        - source: source
+          title: title
+          url: url
+        - source: source
+          title: title
+          url: url
+        id: 0
+        constellations_primary:
+        - "{}"
+        - "{}"
+        slug: slug
+        material_description: material_description
+        credit_line_for_label: credit_line_for_label
+        part_of: "{}"
+        group: "{}"
+        creators_primary:
+        - "{}"
+        - "{}"
+        thumbnail:
+          image_url: image_url
+          has_video: true
+        images:
+        - image_file_l: image_file_l
+          image_file_m: image_file_m
+          caption: caption
+          access_level: access_level
+          image_file_thumbnail: image_file_thumbnail
+          credit_line: credit_line
+          image_file_xs: image_file_xs
+          alt_text: alt_text
+          width: 5
+          image_file: image_file
+          id: 5
+          image_file_s: image_file_s
+          height: 2
+        - image_file_l: image_file_l
+          image_file_m: image_file_m
+          caption: caption
+          access_level: access_level
+          image_file_thumbnail: image_file_thumbnail
+          credit_line: credit_line
+          image_file_xs: image_file_xs
+          alt_text: alt_text
+          width: 5
+          image_file: image_file
+          id: 5
+          image_file_s: image_file_s
+          height: 2
+        is_context_indigenous: true
+        part_siblings:
+        - "{}"
+        - "{}"
+        group_works:
+        - "{}"
+        - "{}"
+        group_siblings:
+        - "{}"
+        - "{}"
+        unpublished: true
+        labels:
+        - 2
+        - 2
+        last_on_display_place: last_on_display_place
+        parts:
+        - "{}"
+        - "{}"
+        creator_credit_for_label: creator_credit_for_label
+        description: description
+        is_on_display: true
+        production_dates:
+        - date: date
+          to_year: to_year
+          notes: notes
+        - date: date
+          to_year: to_year
+          notes: notes
+        eaas_environment_id: eaas_environment_id
+        title: title
+        title_annotation: title_annotation
+        video_links:
+        - name: name
+          id: 1
+          uri: uri
+        - name: name
+          id: 1
+          uri: uri
+        holdings:
+        - identifier: identifier
+          name: name
+          description: description
+        - identifier: identifier
+          name: name
+          description: description
+        constellations_other:
+        - "{}"
+        - "{}"
+        external_references:
+        - id: 4
+          source:
+            name: name
+            slug: slug
+          source_identifier: source_identifier
+        - id: 4
+          source:
+            name: name
+            slug: slug
+          source_identifier: source_identifier
+        acmi_id: acmi_id
+        brief_description: brief_description
+        creators_other:
+        - "{}"
+        - "{}"
+        headline_credit_for_label: headline_credit_for_label
+        first_production_date: first_production_date
+        record_type: record_type
+        production_places:
+        - name: name
+          id: 3
+          slug: slug
+        - name: name
+          id: 3
+          slug: slug
+        media_note: media_note
+      properties:
+        id:
+          type: integer
+        acmi_id:
+          type: string
+        title:
+          type: string
+        title_annotation:
+          type: string
+        slug:
+          type: string
+        creator_credit:
+          type: string
+        credit_line:
+          type: string
+        headline_credit:
+          type: string
+        thumbnail:
+          $ref: '#/components/schemas/Work_thumbnail'
+        record_type:
+          type: string
+        type:
+          type: string
+        is_on_display:
+          type: boolean
+        last_on_display_place:
+          type: string
+        last_on_display_date:
+          type: string
+        is_context_indigenous:
+          type: boolean
+        material_description:
+          type: string
+        unpublished:
+          type: boolean
+        first_production_date:
+          type: string
+        brief_description:
+          type: string
+        constellations_primary:
+          items:
+            allOf:
+            - $ref: '#/components/schemas/ConstellationSummary'
+            type: object
+          type: array
+        constellations_other:
+          items:
+            allOf:
+            - $ref: '#/components/schemas/ConstellationSummary'
+            type: object
+          type: array
+        recommendations:
+          items:
+            $ref: '#/components/schemas/Work_recommendations_inner'
+          type: array
+        title_for_label:
+          type: string
+        creator_credit_for_label:
+          type: string
+        headline_credit_for_label:
+          type: string
+        description:
+          type: string
+        description_for_label:
+          type: string
+        credit_line_for_label:
+          type: string
+        details:
+          items:
+            $ref: '#/components/schemas/Work_details_inner'
+          type: array
+        stats:
+          $ref: '#/components/schemas/Work_stats'
+        links:
+          items:
+            $ref: '#/components/schemas/Work_links_inner'
+          type: array
+        creators_primary:
+          items:
+            allOf:
+            - $ref: '#/components/schemas/CreatorSummary'
+            type: object
+          type: array
+        creators_other:
+          items:
+            allOf:
+            - $ref: '#/components/schemas/CreatorSummary'
+            type: object
+          type: array
+        video_links:
+          items:
+            $ref: '#/components/schemas/Work_video_links_inner'
+          type: array
+        media_note:
+          type: string
+        images:
+          items:
+            $ref: '#/components/schemas/Work_images_inner'
+          type: array
+        videos:
+          items:
+            $ref: '#/components/schemas/Work_videos_inner'
+          type: array
+        holdings:
+          items:
+            $ref: '#/components/schemas/Work_holdings_inner'
+          type: array
+        part_of:
+          allOf:
+          - $ref: '#/components/schemas/WorkSummary'
+          type: object
+        parts:
+          items:
+            allOf:
+            - $ref: '#/components/schemas/WorkSummary'
+            type: object
+          type: array
+        part_siblings:
+          items:
+            allOf:
+            - $ref: '#/components/schemas/WorkSummary'
+            type: object
+          type: array
+        group:
+          allOf:
+          - $ref: '#/components/schemas/WorkSummary'
+          type: object
+        group_works:
+          items:
+            allOf:
+            - $ref: '#/components/schemas/WorkSummary'
+            type: object
+          type: array
+        group_siblings:
+          items:
+            allOf:
+            - $ref: '#/components/schemas/WorkSummary'
+            type: object
+          type: array
+        source:
+          $ref: '#/components/schemas/Work_source'
+        source_identifier:
+          type: string
+        production_places:
+          items:
+            $ref: '#/components/schemas/Work_production_places_inner'
+          type: array
+        production_dates:
+          items:
+            $ref: '#/components/schemas/Work_production_dates_inner'
+          type: array
+        labels:
+          items:
+            type: integer
+          type: array
+        eaas_environment_id:
+          type: string
+        external_references:
+          items:
+            $ref: '#/components/schemas/Work_external_references_inner'
+          type: array
+      type: object
+    Works:
+      description: "A list of Works from the ACMI collection, ordered by most recently\
+        \ updated first."
+      items:
+        allOf:
+        - $ref: '#/definitions/Work'
+        type: object
+      type: array
+    WorkSummary:
+      description: A summary of a Work record
+      properties:
+        id:
+          type: string
+        acmi_id:
+          type: string
+        title:
+          type: string
+        title_annotation:
+          type: string
+        slug:
+          type: string
+        creator_credit:
+          type: string
+        credit_line:
+          type: string
+        headline_credit:
+          type: string
+        thumbnail:
+          $ref: '#/components/schemas/Work_thumbnail'
+        record_type:
+          type: string
+        type:
+          type: string
+        is_on_display:
+          type: boolean
+        last_on_display_place:
+          type: string
+        last_on_display_date:
+          type: string
+        is_context_indigenous:
+          type: boolean
+        material_description:
+          type: string
+        unpublished:
+          type: boolean
+        first_production_date:
+          type: string
+      type: object
+    CreatorSummary:
+      description: A summary of a Creator record.
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        creator_id:
+          type: integer
+        creator_wikidata_id:
+          type: string
+        role:
+          type: string
+        role_id:
+          type: integer
+        is_primary:
+          type: boolean
+      type: object
+    ConstellationSummary:
+      description: "A summary of a Constellation record, which is a collection of\
+        \ Works that relate to each other in meaningful ways."
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+      type: object
+    VideoMetadata:
+      description: The metadata of a Video.
+      properties:
+        title:
+          type: string
+        width:
+          type: integer
+        height:
+          type: integer
+        checksum:
+          type: string
+        filetype:
+          type: string
+        mime_type:
+          type: string
+        vernon_id:
+          type: string
+        audio_codec:
+          type: string
+        video_codec:
+          type: string
+        duration_hms:
+          type: string
+        duration_secs:
+          format: float
+          type: number
+        audio_bit_rate:
+          type: integer
+        audio_channels:
+          type: integer
+        video_bit_rate:
+          type: integer
+        file_size_bytes:
+          type: integer
+        overall_bit_rate:
+          type: integer
+        video_frame_rate:
+          format: float
+          type: number
+        audio_sample_rate:
+          type: integer
+        creation_datetime:
+          type: string
+        audio_max_bit_rate:
+          type: integer
+        video_max_bit_rate:
+          type: integer
+      type: object
+    __get_200_response:
+      example:
+        acknowledgement: acknowledgement
+        api:
+        - api
+        - api
+        message: message
+      properties:
+        message:
+          type: string
+        api:
+          items:
+            type: string
+          type: array
+        acknowledgement:
+          type: string
+      type: object
+    Work_thumbnail:
+      example:
+        image_url: image_url
+        has_video: true
+      properties:
+        image_url:
+          type: string
+        has_video:
+          type: boolean
+      type: object
+    Work_recommendations_inner:
+      example:
+        quote: quote
+        avatar_image: avatar_image
+        display_name: display_name
+        job_title: job_title
+      properties:
+        display_name:
+          type: string
+        job_title:
+          type: string
+        avatar_image:
+          type: string
+        quote:
+          type: string
+      type: object
+    Work_details_inner:
+      example:
+        display_values:
+        - display_values
+        - display_values
+        label: label
+      properties:
+        label:
+          type: string
+        display_values:
+          items:
+            type: string
+          type: array
+      type: object
+    Work_stats:
+      example:
+        tap_count: 6
+      properties:
+        tap_count:
+          type: integer
+      type: object
+    Work_links_inner:
+      example:
+        source: source
+        title: title
+        url: url
+      properties:
+        url:
+          type: string
+        title:
+          type: string
+        source:
+          type: string
+      type: object
+    Work_video_links_inner:
+      example:
+        name: name
+        id: 1
+        uri: uri
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        uri:
+          type: string
+      type: object
+    Work_images_inner:
+      example:
+        image_file_l: image_file_l
+        image_file_m: image_file_m
+        caption: caption
+        access_level: access_level
+        image_file_thumbnail: image_file_thumbnail
+        credit_line: credit_line
+        image_file_xs: image_file_xs
+        alt_text: alt_text
+        width: 5
+        image_file: image_file
+        id: 5
+        image_file_s: image_file_s
+        height: 2
+      properties:
+        id:
+          type: integer
+        image_file:
+          type: string
+        image_file_thumbnail:
+          type: string
+        image_file_xs:
+          type: string
+        image_file_s:
+          type: string
+        image_file_m:
+          type: string
+        image_file_l:
+          type: string
+        caption:
+          type: string
+        credit_line:
+          type: string
+        alt_text:
+          type: string
+        width:
+          type: integer
+        height:
+          type: integer
+        access_level:
+          type: string
+      type: object
+    Work_videos_inner:
+      example:
+        access_level: access_level
+        subtitles: subtitles
+        web_metadata: "{}"
+        resource: resource
+        web_resource: web_resource
+        animated_snapshot: animated_snapshot
+        id: 7
+        title: title
+        duration_secs: 9.301444
+        access_metadata: "{}"
+        master_metadata: "{}"
+        snapshot: snapshot
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        resource:
+          type: string
+        web_resource:
+          type: string
+        duration_secs:
+          format: float
+          type: number
+        subtitles:
+          type: string
+        master_metadata:
+          allOf:
+          - $ref: '#/components/schemas/VideoMetadata'
+          type: object
+        access_metadata:
+          allOf:
+          - $ref: '#/components/schemas/VideoMetadata'
+          type: object
+        web_metadata:
+          allOf:
+          - $ref: '#/components/schemas/VideoMetadata'
+          type: object
+        access_level:
+          type: string
+        snapshot:
+          type: string
+        animated_snapshot:
+          type: string
+      type: object
+    Work_holdings_inner:
+      example:
+        identifier: identifier
+        name: name
+        description: description
+      properties:
+        name:
+          type: string
+        identifier:
+          type: string
+        description:
+          type: string
+      type: object
+    Work_source:
+      example:
+        name: name
+        slug: slug
+      properties:
+        name:
+          type: string
+        slug:
+          type: string
+      type: object
+    Work_production_places_inner:
+      example:
+        name: name
+        id: 3
+        slug: slug
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        slug:
+          type: string
+      type: object
+    Work_production_dates_inner:
+      example:
+        date: date
+        to_year: to_year
+        notes: notes
+      properties:
+        date:
+          type: string
+        notes:
+          type: string
+        to_year:
+          type: string
+      type: object
+    Work_external_references_inner:
+      example:
+        id: 4
+        source:
+          name: name
+          slug: slug
+        source_identifier: source_identifier
+      properties:
+        id:
+          type: integer
+        source:
+          $ref: '#/components/schemas/Work_source'
+        source_identifier:
+          type: string
+      type: object
+x-original-swagger-version: "2.0"
